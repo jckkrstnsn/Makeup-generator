@@ -1,0 +1,29 @@
+function fetchMakeupData() {
+  const url = 'https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline';
+  
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => data)
+    .catch(error => {
+      console.error('Error fetching makeup data:', error);
+    });
+}
+In this function, we first define the URL of the API endpoint we want to fetch data from. We then use the fetch method to make a network request to the URL.
+
+If the response is not successful (i.e., the HTTP status code is not in the 200-299 range), we throw an error. Otherwise, we parse the response body as JSON and return the data.
+
+If there's an error during the fetch request or parsing of the response body, we catch the error and log it to the console.
+
+Note that this function returns a Promise, which is a common pattern when working with asynchronous operations in JavaScript. You would call this function like this:
+fetchMakeupData()
+  .then(data => {
+    console.log('Makeup data:', data);
+  })
+  .catch(error => {
+    console.error('Error fetching makeup data:', error);
+  });
